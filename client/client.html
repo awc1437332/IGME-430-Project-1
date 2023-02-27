@@ -44,23 +44,23 @@
           content.innerHTML += `<p>${jsonResponse.message}</p>`;
         } else {
           // The object has no message to return, so return a default message
-          content.innerHTML += `<p>${JSON.stringify(jsonResponse.users)}</p>`;
+          content.innerHTML += `<p>${JSON.stringify(jsonResponse.events)}</p>`;
         }
       }
     };
 
-    const postRequest = async (nameForm) => {
+    const postRequest = async (eventForm) => {
       //get the values from nameForm
-      const action = nameForm.getAttribute('action');
-      const method = nameForm.getAttribute('method');
+      const action = eventForm.getAttribute('action');
+      const method = eventForm.getAttribute('method');
 
       // Get the input values to post
-      const nameInput = nameForm.querySelector('#nameField');
-      const ageInput = nameForm.querySelector('#ageField');
+      const eventInput = eventForm.querySelector('#eventNameField');
+      const minutesInput = eventForm.querySelector('#minuteField');
+      const hoursInput = eventForm.querySelector('#hourField');
 
-      const params = `name=${nameInput.value}&age=${ageInput.value}`;
+      const params = `event=${eventInput.value}&minutes=${minutesInput.value}&hours=${hoursInput.value}`;
 
-      console.log("In postRequest, beginning post request");
       // Craft the response object to return
       let response = await fetch(action, {
         method: method,
@@ -92,12 +92,12 @@
 
     const init = () => {
       // Grab references to the forms.
-      const nameForm = document.querySelector('#nameForm');
+      const eventForm = document.querySelector('#eventForm');
       const userForm = document.querySelector('#userForm');
       // Post request
       const postUser = (e) => {
         e.preventDefault();
-        postRequest(nameForm);
+        postRequest(eventForm);
         return;
       };
 
@@ -108,7 +108,7 @@
         return;
       };
 
-      nameForm.addEventListener('submit', postUser);
+      eventForm.addEventListener('submit', postUser);
       userForm.addEventListener('submit', fetchUser);
     };
 
@@ -119,24 +119,29 @@
 
 <body>
   <section id="top">
-    <h3>POST Status Code Tests</h3>
-    <form id="nameForm" action="/addUser" method="post">
-      <label for="name">Name: </label>
-      <input id="nameField" type="text" name="name" />
-      <label for="age">Age: </label>
-      <input id="ageField" type="number" name="age" min="0" max="100" step="1" />
-      <input type="submit" value="Add User" />
+    <h1>Your Friendly Schedule Maker</h1>
+    <p>
+      Welcome to your friendly Schedule Maker. Here you can add events to your schedule. You can add event names and the times of those events.
+    </p>
+    <form id="eventForm" action="/addEvent" method="post">
+      <label for="eventName">Event Name: </label>
+      <input id="eventNameField" type="text" name="eventName" />
+      <label for="hours">Hours: </label>
+      <input id="hourField" type="number" name="hours" min="0" max="12" step="1"/>
+      <label for="minutes">Minutes: </label>
+      <input id="minuteField" type="number" name="minutes" min="0" max="59" step="1"/>
+      <input type="submit" value="Add Event" />
     </form>
-    <form id="userForm" action="/getUsers" method="get">
+    <form id="userForm" action="/getEvents" method="get">
       <select id='urlField'>
-        <option value='/getUsers'>/getUsers</option>
+        <option value='/getEvents'>/getEvents</option>
         <option value='/notReal'>/notReal</option>
       </select>
       <select id="methodSelect">
         <option value="get">GET</option>
         <option value="head">HEAD</option>
       </select>
-      <input type="submit" value="Get User" />
+      <input type="submit" value="Get Schedule" />
     </form>
   </section>
   <section id="content">

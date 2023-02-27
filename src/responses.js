@@ -4,7 +4,7 @@ const index = fs.readFileSync(`${__dirname}/../client/client.html`);
 const style = fs.readFileSync(`${__dirname}/../client/style.css`);
 
 // Holds all the user objects.
-const users = {};
+const events = {};
 
 // Respond Function
 const respond = (request, response, content, status, type) => {
@@ -27,10 +27,11 @@ const jsonGetData = (request, response, status, jsonObj) => {
   respond(request, response, JSON.stringify(jsonObj), status, 'application/json');
 };
 
-const jsonGetUsers = (request, response) => {
+const jsonGetEvents = (request, response) => {
   const responseJSON = {
-    users,
+    events,
   };
+  console.log(events);
 
   return jsonGetData(request, response, 200, responseJSON);
 };
@@ -50,21 +51,20 @@ const jsonHeadData = (request, response, status) => {
   response.end();
 };
 
-const jsonHeadUsers = (request, response) => jsonHeadData(request, response, 200);
+const jsonHeadEvents = (request, response) => jsonHeadData(request, response, 200);
 
 const notFoundHead = (request, response) => jsonHeadData(request, response, 404);
 
 // Post
 
-const jsonPostUser = (request, response, body) => {
+const jsonPostEvent = (request, response, body) => {
   // We assume that the user has not passed the correct parameters
-  console.log('inside jsonPostUser...');
   const responseObj = {
     message: 'Missing required params.',
   };
 
   // If this is true return out of the method with a bad request response
-  if (!body.name || !body.age) {
+  if (!body.event || !body.hours || !body.minutes) {
     responseObj.id = 'missingParams';
     return jsonGetData(request, response, 400, responseObj);
   }
@@ -73,14 +73,16 @@ const jsonPostUser = (request, response, body) => {
   let status = 204;
 
   // If user does not exist, create a new one
-  if (!users[body.name]) {
+  if (!events[body.event]) {
     status = 201;
-    users[body.name] = {};
+    events[body.event] = {};
   }
 
   // assign data to the object
-  users[body.name].name = body.name;
-  users[body.name].age = body.age;
+  events[body.event].event = body.event;
+  events[body.event].hours = body.hours;
+  events[body.event].minutes = body.minutes;
+
 
   // add a message if the user was just added
   if (status === 201) {
@@ -88,6 +90,7 @@ const jsonPostUser = (request, response, body) => {
     return jsonGetData(request, response, status, responseObj);
   }
 
+  console.log(events);
   console.log('reached end of post request, sending response...');
   return jsonHeadData(request, response, status);
 };
@@ -95,9 +98,9 @@ const jsonPostUser = (request, response, body) => {
 module.exports = {
   getIndex,
   getStyle,
-  jsonGetUsers,
-  jsonHeadUsers,
+  jsonGetEvents,
+  jsonHeadEvents,
   notFoundGet,
   notFoundHead,
-  jsonPostUser,
+  jsonPostEvent,
 };

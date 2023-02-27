@@ -31,9 +31,9 @@ const parseContent = (request, response, handlerFunction) => {
 const handlePost = (request, response, parsedUrl) => {
   console.log('handling post...');
   // STUCK HERE
-  if (parsedUrl.pathname === '/addUser') {
+  if (parsedUrl.pathname === '/addEvent') {
     console.log('inside if statement');
-    parseContent(request, response, responseHandler.jsonPostUser);
+    parseContent(request, response, responseHandler.jsonPostEvent);
   }
 };
 
@@ -43,8 +43,9 @@ const handleGet = (request, response, parsedUrl) => {
     case '/style.css':
       responseHandler.getStyle(request, response);
       break;
-    case '/getUsers':
-      responseHandler.jsonGetUsers(request, response);
+    case '/getEvents':
+      responseHandler.jsonGetEvents(request, response);
+      console.log('returned array.');
       break;
     case '/':
       responseHandler.getIndex(request, response);
@@ -58,8 +59,8 @@ const handleGet = (request, response, parsedUrl) => {
 // Head
 const handleHead = (request, response, parsedUrl) => {
   switch (parsedUrl.pathname) {
-    case '/getUsers':
-      responseHandler.jsonHeadUsers(request, response);
+    case '/getEvents':
+      responseHandler.jsonHeadEvents(request, response);
       break;
     default:
       responseHandler.notFoundHead(request, response);
