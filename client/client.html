@@ -44,7 +44,13 @@
           content.innerHTML += `<p>${jsonResponse.message}</p>`;
         } else {
           // The object has no message to return, so return a default message
-          content.innerHTML += `<p>${JSON.stringify(jsonResponse.events)}</p>`;
+          // content.innerHTML += `<p>${JSON.stringify(jsonResponse.events)}</p>`;
+          for (var element in jsonResponse.events) {
+            // console.log(jsonResponse.events[element]);
+            content.innerHTML += `<h3>${jsonResponse.events[element].event}</h3>
+            <p>Date of \"${jsonResponse.events[element].event}\"" set to ${jsonResponse.events[element].date}. 
+              Time set to ${jsonResponse.events[element].time}.</p>`;
+          }
         }
       }
     };
