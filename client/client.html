@@ -56,10 +56,10 @@
 
       // Get the input values to post
       const eventInput = eventForm.querySelector('#eventNameField');
-      const minutesInput = eventForm.querySelector('#minuteField');
-      const hoursInput = eventForm.querySelector('#hourField');
+      const dateInput = eventForm.querySelector('#dateField');
+      const timeInput = eventForm.querySelector('#timeField');
 
-      const params = `event=${eventInput.value}&minutes=${minutesInput.value}&hours=${hoursInput.value}`;
+      const params = `event=${eventInput.value}&time=${timeInput.value}&date=${dateInput.value}`;
 
       // Craft the response object to return
       let response = await fetch(action, {
@@ -126,10 +126,10 @@
     <form id="eventForm" action="/addEvent" method="post">
       <label for="eventName">Event Name: </label>
       <input id="eventNameField" type="text" name="eventName" />
-      <label for="hours">Hours: </label>
-      <input id="hourField" type="number" name="hours" min="0" max="12" step="1"/>
-      <label for="minutes">Minutes: </label>
-      <input id="minuteField" type="number" name="minutes" min="0" max="59" step="1"/>
+      <label for="date">Date: </label>
+      <input id="dateField" type="date" name="date"/>
+      <label for="time">Time: </label>
+      <input id="timeField" type="time" name="time"/>
       <input type="submit" value="Add Event" />
     </form>
     <form id="userForm" action="/getEvents" method="get">

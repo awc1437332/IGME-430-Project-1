@@ -64,7 +64,7 @@ const jsonPostEvent = (request, response, body) => {
   };
 
   // If this is true return out of the method with a bad request response
-  if (!body.event || !body.hours || !body.minutes) {
+  if (!body.event || !body.date || !body.time) {
     responseObj.id = 'missingParams';
     return jsonGetData(request, response, 400, responseObj);
   }
@@ -80,9 +80,8 @@ const jsonPostEvent = (request, response, body) => {
 
   // assign data to the object
   events[body.event].event = body.event;
-  events[body.event].hours = body.hours;
-  events[body.event].minutes = body.minutes;
-
+  events[body.event].date = body.date;
+  events[body.event].time = body.time;
 
   // add a message if the user was just added
   if (status === 201) {
