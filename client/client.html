@@ -4,7 +4,10 @@
 <head>
   <title>Our simple HTTP server</title>
   <link rel="stylesheet" type="text/css" href="/style.css">
+  <script src="/scheduleCard.js"></script>
+  <script src="/scheduleEvent.js"></script>
   <script>
+    
     //Handles the requests sent to the server
     const handleResponse = async (response, method) => {
       const content = document.querySelector('#content');

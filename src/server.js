@@ -47,6 +47,12 @@ const handleGet = (request, response, parsedUrl) => {
       responseHandler.jsonGetEvents(request, response);
       console.log('returned array.');
       break;
+    case '/scheduleCard.js':
+      responseHandler.getScheduleCard(request,response);
+      break;
+    case '/scheduleEvent.js':
+      responseHandler.getScheduleEvent(request, response);
+      break;
     case '/':
       responseHandler.getIndex(request, response);
       break;
