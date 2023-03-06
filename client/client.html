@@ -11,10 +11,12 @@
     //Handles the requests sent to the server
     const handleResponse = async (response, method) => {
       const content = document.querySelector('#content');
+      let cardContainer;
 
       switch (response.status) {
         case 200:
-          content.innerHTML = '<b>Success</b>';
+          content.innerHTML = '<b>Success</b><div id="cardContainer"></div>';
+          cardContainer = document.querySelector('#cardContainer');
           break;
         case 201:
           content.innerHTML = '<b>Created</b>';
@@ -50,9 +52,12 @@
           // content.innerHTML += `<p>${JSON.stringify(jsonResponse.events)}</p>`;
           for (var element in jsonResponse.events) {
             // console.log(jsonResponse.events[element]);
-            content.innerHTML += `<h3>${jsonResponse.events[element].event}</h3>
-            <p>Date of \"${jsonResponse.events[element].event}\"" set to ${jsonResponse.events[element].date}. 
-              Time set to ${jsonResponse.events[element].time}.</p>`;
+            const myCard = document.createElement('schedule-card');
+            myCard.event = new ScheduleEvent(jsonResponse.events[element].event, jsonResponse.events[element].date, jsonResponse.events[element].time)
+            if (cardContainer.innerHTML === '') {
+              cardContainer.innerHTML += '<p>Current Schedule Created:</p>'
+            }
+            cardContainer.appendChild(myCard);
           }
         }
       }

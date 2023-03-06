@@ -1,3 +1,7 @@
+html {
+  background-color: rgb(44, 44, 192);
+}
+
 html, body {
   height: 100%;
   width: 100%;
@@ -7,15 +11,37 @@ html, body {
 
 #top {
   text-align: center;
-  margin: 0 auto;
+  font-size: 1.4em;
+  margin: 30px 50px;
+  padding: 50px;
+  background-color: rgb(226, 226, 226);
 }
 
 #top h1 {
-  font-size: 2em;
+  font-size: 1.75em;
+}
+
+#top form {
+  margin: 25px auto;
+}
+
+select, input {
+  font-size: 1.10em;
 }
 
 #content {
-  margin-top: 100px;
+  margin-top: 50px;
   font-size: 2em;
   text-align: center;
+}
+
+#content b {
+  background-color: rgb(226, 226, 226);
+  padding: 50px;
+}
+
+#content p {
+  background-color: rgb(226, 226, 226);
+  margin: 20px 50px;
+  padding: 50px;
 }

@@ -2,8 +2,8 @@ const fs = require('fs');
 
 const index = fs.readFileSync(`${__dirname}/../client/client.html`);
 const style = fs.readFileSync(`${__dirname}/../client/style.css`);
-const scheduleCard = fs.readFileSync(`${__dirname}/../client/scheduleCard.js`);
-const scheduleEvent = fs.readFileSync(`${__dirname}/../client/scheduleEvent.js`);
+const scheduleCard = fs.readFileSync(`${__dirname}/../client/Schedule-Card.js`);
+const scheduleEvent = fs.readFileSync(`${__dirname}/../client/Schedule-Event.js`);
 
 // Holds all the user objects.
 const events = {};
@@ -26,11 +26,11 @@ const getStyle = (request, response) => {
 
 const getScheduleCard = (request, response) => {
   respond(request, response, scheduleCard, 200, 'application/javascript');
-}
+};
 
 const getScheduleEvent = (request, response) => {
   respond(request, response, scheduleEvent, 200, 'application/javascript');
-}
+};
 
 // GET
 const jsonGetData = (request, response, status, jsonObj) => {

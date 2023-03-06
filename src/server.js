@@ -48,7 +48,7 @@ const handleGet = (request, response, parsedUrl) => {
       console.log('returned array.');
       break;
     case '/scheduleCard.js':
-      responseHandler.getScheduleCard(request,response);
+      responseHandler.getScheduleCard(request, response);
       break;
     case '/scheduleEvent.js':
       responseHandler.getScheduleEvent(request, response);

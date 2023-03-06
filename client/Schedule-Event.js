@@ -1,4 +1,4 @@
-export default class scheduleEvent{
+class ScheduleEvent{
     constructor(name,date,time){
         // this.name = name;
         // this.date = date;
